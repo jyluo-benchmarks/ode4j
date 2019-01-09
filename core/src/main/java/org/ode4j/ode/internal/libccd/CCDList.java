@@ -2,7 +2,7 @@
  * libccd
  * ---------------------------------
  * Copyright (c)2010 Daniel Fiser <danfis@danfis.cz>
- * Java-port: Copyright (c) 2009-2014 Tilmann Zaeschke<ode4j@gmx.de>  
+ * Java-port: Copyright (c) 2009-2014 Tilmann Zaeschke<ode4j@gmx.de>
  *
  *
  *  This file is part of libccd.
@@ -29,14 +29,14 @@ public class CCDList {
 	static final class ccd_list_t<T> implements Iterable<T> {
 	    private ccd_list_t<T> next = this;
 	    private ccd_list_t<T> prev = this;
-	    final T o; 
+	    final T o;
 	    public ccd_list_t(T obj) {
 	    	this.o = obj;
 		}
 		@Override
 		public Iterator<T> iterator() {
 			return new Iterator<T>() {
-				private final ccd_iter_t<T> iter = new ccd_iter_t<T>(ccd_list_t.this);
+				private final ccd_iter_t iter = new ccd_iter_t(ccd_list_t.this);
 				@Override
 				public boolean hasNext() {
 					return iter.hasNext();
@@ -44,7 +44,7 @@ public class CCDList {
 
 				@Override
 				public T next() {
-					return iter.next();
+					return (T) iter.next();
 				}
 
 				@Override
@@ -52,15 +52,15 @@ public class CCDList {
 					// TODO Auto-generated method stub
 					throw new UnsupportedOperationException();
 				}
-				
+
 			};
 		}
 	};
 
 	//TZ
 	private static final class ccd_iter_t<T> {
-//	    for (pos = ccdListEntry((head).next, postype, member), n = ccdListEntry(pos.member.next, postype, member);	
-//	     pos.member != (head); 					
+//	    for (pos = ccdListEntry((head).next, postype, member), n = ccdListEntry(pos.member.next, postype, member);
+//	     pos.member != (head);
 //	     pos = n, n = ccdListEntry(n.member.next, ntype, member));
 		private ccd_list_t<T> pos;
 		private ccd_list_t<T> n;
@@ -80,11 +80,11 @@ public class CCDList {
 			return prevPos;
 		}
 	}
-	
+
 //	static final <T> ccd_iter_t<T> ccd_iter(ccd_list_t<T> list) {
 //		return new ccd_iter_t<T>(list);
 //	}
-	
+
 
 //	/**
 //	 * Get the struct for this entry.
@@ -100,8 +100,8 @@ public class CCDList {
 //	 * Iterates over list.
 //	 */
 //	static final void ccdListForEach(ccd_list_t list, ccd_list_t item) {
-//	        for (item = (list).next; 
-//	             _ccd_prefetch((item).next), item != (list); 
+//	        for (item = (list).next;
+//	             _ccd_prefetch((item).next), item != (list);
 //	             item = (item).next);
 //	}
 //
@@ -109,8 +109,8 @@ public class CCDList {
 //	 * Iterates over list safe against remove of list entry
 //	 */
 //	static final void ccdListForEachSafe(ccd_list_t list, ccd_list_t item, tmp) {
-//		    for (item = (list).next, tmp = (item).next; 
-//	             item != (list); 
+//		    for (item = (list).next, tmp = (item).next;
+//	             item != (list);
 //			     item = tmp, tmp = (item).next);
 //	}
 //
@@ -121,8 +121,8 @@ public class CCDList {
 //	 * @member:	the name of the list_struct within the struct.
 //	 */
 //	static final void ccdListForEachEntry(ccd_list_t head, pos, postype, member) {
-//		for (pos = ccdListEntry((head).next, postype, member);	
-//		     _ccd_prefetch(pos.member.next), pos.member != (head); 	
+//		for (pos = ccdListEntry((head).next, postype, member);
+//		     _ccd_prefetch(pos.member.next), pos.member != (head);
 //		     pos = ccdListEntry(pos.member.next, postype, member));
 //	}
 //
@@ -134,9 +134,9 @@ public class CCDList {
 //	 * @member:	the name of the list_struct within the struct.
 //	 */
 //	static final void ccdListForEachEntrySafe(ccd_list_t head, pos, postype, n, ntype, member) {
-//	    for (pos = ccdListEntry((head).next, postype, member),             
-//			 n = ccdListEntry(pos.member.next, postype, member);	
-//		     pos.member != (head); 					
+//	    for (pos = ccdListEntry((head).next, postype, member),
+//			 n = ccdListEntry(pos.member.next, postype, member);
+//		     pos.member != (head);
 //		     pos = n, n = ccdListEntry(n.member.next, ntype, member));
 //	}
 
